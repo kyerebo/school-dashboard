@@ -6,70 +6,36 @@ import firebase from "./firebase.js";
 class Assign extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      students: this.props.students,
-      teachers: this.props.teachers,
-    };
+    this.state = {};
     this.studentName = React.createRef();
     this.teacherName = React.createRef();
   }
 
-  componentDidMount() {
-    const studentsRef = firebase.database().ref("students");
-    const teachersRef = firebase.database().ref("teachers");
-    studentsRef.on("value", (snapshot) => {
-      let students = snapshot.val();
-      let newState = [];
-      for (let student in students) {
-        newState.push({
-          id: student,
-          name: students[student].name,
-        });
-      }
-      this.setState({
-        students: newState,
-      });
-    });
-    teachersRef.on("value", (snapshot) => {
-      let teachers = snapshot.val();
-      let newState = [];
-      for (let teacher in teachers) {
-        newState.push({
-          id: teacher,
-          name: teachers[teacher].name,
-        });
-      }
-      this.setState({
-        teachers: newState,
-      });
-    });
-  }
-  removeStudent(studentID) {
+  removeStudent = (studentID) => {
     const studentRef = firebase.database().ref(`/students/${studentID}`);
     studentRef.remove();
-  }
+  };
   handleSubmit = (e) => {
     e.preventDefault();
-    const studentsRef = firebase.database().ref("students");
-    const student = {
-      name: this.studentName.current.value,
-      teacher: this.teacherName.current.value,
-    };
-    alert(
-      this.studentName.current.value +
-        " has been assigned to " +
-        this.teacherName.current.value
-    );
-    studentsRef.push(student);
-    this.removeStudent(this.studentName.current.key);
+    let idName = this.studentName.current.value.split(",");
+    const studentRef = firebase.database().ref(`/students/${idName[0]}`);
+    let student = idName[1];
+    let teacher = this.teacherName.current.value;
+    studentRef.update({
+      name: student,
+      teacher: teacher,
+    });
+    alert(student + " assigned to " + teacher);
   };
   render() {
-    let students = this.state.students.map((student) => (
-      <option key={student.id} value={student.name}>
-        {student.name}
-      </option>
-    ));
-    let teachers = this.state.teachers.map((teacher) => (
+    let students = this.props.students.map(function (student) {
+      return (
+        <option key={student.id} value={[student.id, student.name]}>
+          {student.name}
+        </option>
+      );
+    });
+    let teachers = this.props.teachers.map((teacher) => (
       <option key={teacher.id} value={teacher.name}>
         {teacher.name}
       </option>

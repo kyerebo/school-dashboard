@@ -4,6 +4,7 @@ import Enroll from "./Enroll.js";
 import Assign from "./Assign.js";
 import Hire from "./Hire.js";
 import Remove from "./Remove.js";
+import StudentInfo from "./StudentInfo.js";
 import "./App.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
@@ -32,6 +33,7 @@ class App extends Component {
         newState.push({
           id: student,
           name: students[student].name,
+          teacher: students[student].teacher,
         });
       }
       this.setState({
@@ -57,7 +59,7 @@ class App extends Component {
     return (
       <div>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand>Thomas Jefferson Elementary School</Navbar.Brand>
+          <Navbar.Brand>Thomas Jefferson ES Dashboard</Navbar.Brand>
           <Form inline>
             <FormControl
               type="text"
@@ -65,7 +67,7 @@ class App extends Component {
               className="mr-sm-2"
             />
             <FormControl
-              type="text"
+              type="password"
               placeholder="Password"
               className="mr-sm-2"
             />
@@ -121,6 +123,21 @@ class App extends Component {
             <Accordion.Collapse eventKey="3">
               <Card.Body>
                 <Remove
+                  students={this.state.students}
+                  teachers={this.state.teachers}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="outline" eventKey="4">
+                Student Information
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="4">
+              <Card.Body>
+                <StudentInfo
                   students={this.state.students}
                   teachers={this.state.teachers}
                 />
