@@ -1,7 +1,7 @@
 import firebase from "firebase";
 
 var config = {
-  apiKey: "AIzaSyAafCI7INY2i4lB_jnrjTCZcokU8SjDlLM",
+  apiKey: process.env.REACT_APP_KEY,
   authDomain: "school-dashboard-bc657.firebaseapp.com",
   databaseURL: "https://school-dashboard-bc657.firebaseio.com",
   projectId: "school-dashboard-bc657",
