@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Check out a demo of this app here: http://kyerebo.github.io/school-dashboard.
 
 ## Available Scripts
 

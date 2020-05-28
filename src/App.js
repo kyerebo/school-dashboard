@@ -137,10 +137,7 @@ class App extends Component {
             </Card.Header>
             <Accordion.Collapse eventKey="4">
               <Card.Body>
-                <StudentInfo
-                  students={this.state.students}
-                  teachers={this.state.teachers}
-                />
+                <StudentInfo students={this.state.students} />
               </Card.Body>
             </Accordion.Collapse>
           </Card>

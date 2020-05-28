@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-const StudentInfo = ({ students, teachers }) => {
+const StudentInfo = ({ students }) => {
   return (
     <Table responsive bordered hover striped size="sm">
       <thead>
