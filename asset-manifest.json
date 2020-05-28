@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/kyerebo/school-dashboard/static/css/main.5f361e03.chunk.css",
-    "main.js": "/kyerebo/school-dashboard/static/js/main.0771023d.chunk.js",
-    "main.js.map": "/kyerebo/school-dashboard/static/js/main.0771023d.chunk.js.map",
-    "runtime-main.js": "/kyerebo/school-dashboard/static/js/runtime-main.f4883434.js",
-    "runtime-main.js.map": "/kyerebo/school-dashboard/static/js/runtime-main.f4883434.js.map",
-    "static/css/2.af3c1da9.chunk.css": "/kyerebo/school-dashboard/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.a18b5caf.chunk.js": "/kyerebo/school-dashboard/static/js/2.a18b5caf.chunk.js",
-    "static/js/2.a18b5caf.chunk.js.map": "/kyerebo/school-dashboard/static/js/2.a18b5caf.chunk.js.map",
-    "index.html": "/kyerebo/school-dashboard/index.html",
-    "precache-manifest.147eb45dd1c55a405c8e9cc0e8be2c9f.js": "/kyerebo/school-dashboard/precache-manifest.147eb45dd1c55a405c8e9cc0e8be2c9f.js",
-    "service-worker.js": "/kyerebo/school-dashboard/service-worker.js",
-    "static/css/2.af3c1da9.chunk.css.map": "/kyerebo/school-dashboard/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.5f361e03.chunk.css.map": "/kyerebo/school-dashboard/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.a18b5caf.chunk.js.LICENSE.txt": "/kyerebo/school-dashboard/static/js/2.a18b5caf.chunk.js.LICENSE.txt"
+    "main.css": "/school-dashboard/static/css/main.5f361e03.chunk.css",
+    "main.js": "/school-dashboard/static/js/main.872a0084.chunk.js",
+    "main.js.map": "/school-dashboard/static/js/main.872a0084.chunk.js.map",
+    "runtime-main.js": "/school-dashboard/static/js/runtime-main.3d954908.js",
+    "runtime-main.js.map": "/school-dashboard/static/js/runtime-main.3d954908.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/school-dashboard/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.11d9d4b8.chunk.js": "/school-dashboard/static/js/2.11d9d4b8.chunk.js",
+    "static/js/2.11d9d4b8.chunk.js.map": "/school-dashboard/static/js/2.11d9d4b8.chunk.js.map",
+    "index.html": "/school-dashboard/index.html",
+    "precache-manifest.12bb6b3d9736ad2cc17ace6f49408c28.js": "/school-dashboard/precache-manifest.12bb6b3d9736ad2cc17ace6f49408c28.js",
+    "service-worker.js": "/school-dashboard/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/school-dashboard/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/school-dashboard/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.11d9d4b8.chunk.js.LICENSE.txt": "/school-dashboard/static/js/2.11d9d4b8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f4883434.js",
+    "static/js/runtime-main.3d954908.js",
     "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.a18b5caf.chunk.js",
+    "static/js/2.11d9d4b8.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.0771023d.chunk.js"
+    "static/js/main.872a0084.chunk.js"
   ]
 }
