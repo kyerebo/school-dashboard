@@ -14,6 +14,7 @@ class Enroll extends Component {
     const studentsRef = firebase.database().ref("students");
     const student = {
       name: this.studentName.current.value,
+      teacher: "",
     };
     studentsRef.push(student);
     alert(this.studentName.current.value + " submitted as new student.");
