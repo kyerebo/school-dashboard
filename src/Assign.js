@@ -18,13 +18,18 @@ class Assign extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let idName = this.studentName.current.value.split(",");
-    const studentRef = firebase.database().ref(`/students/${idName[0]}`);
+    let idNameT = this.teacherName.current.value.split(",");
     let student = idName[1];
-    let teacher = this.teacherName.current.value;
+    let teacher = idNameT[1];
+    const studentRef = firebase.database().ref(`/students/${idName[0]}`);
+    const teacherRef = firebase
+      .database()
+      .ref(`/teachers/${idNameT[0]}/students`);
     studentRef.update({
       name: student,
       teacher: teacher,
     });
+    teacherRef.push({ student });
     alert(student + " assigned to " + teacher);
   };
   render() {
@@ -36,7 +41,7 @@ class Assign extends Component {
       );
     });
     let teachers = this.props.teachers.map((teacher) => (
-      <option key={teacher.id} value={teacher.name}>
+      <option key={teacher.id} value={[teacher.id, teacher.name]}>
         {teacher.name}
       </option>
     ));

@@ -14,6 +14,7 @@ class Hire extends Component {
     const teachersRef = firebase.database().ref("teachers");
     const teacher = {
       name: this.teacherName.current.value,
+      students: "",
     };
     teachersRef.push(teacher);
     alert(this.teacherName.current.value + " submitted as new teacher.");

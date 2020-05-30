@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "./firebase.js";
+import firebase, { auth, provider } from "./firebase.js";
 import Enroll from "./Enroll.js";
 import Assign from "./Assign.js";
 import Hire from "./Hire.js";
@@ -9,8 +9,6 @@ import "./App.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -20,10 +18,16 @@ class App extends Component {
     this.state = {
       students: [],
       teachers: [],
+      user: null,
     };
   }
 
   componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
     const studentsRef = firebase.database().ref("students");
     const teachersRef = firebase.database().ref("teachers");
     studentsRef.on("value", (snapshot) => {
@@ -44,9 +48,15 @@ class App extends Component {
       let teachers = snapshot.val();
       let newState = [];
       for (let teacher in teachers) {
+        let newStudents = [];
+        for (let student in teachers[teacher].students) {
+          console.log(teachers[teacher].students[student].student);
+          newStudents.push(teachers[teacher].students[student].student);
+        }
         newState.push({
           id: teacher,
           name: teachers[teacher].name,
+          students: newStudents,
         });
       }
       this.setState({
@@ -54,30 +64,59 @@ class App extends Component {
       });
     });
   }
-
+  login = () => {
+    auth.signInWithPopup(provider).then((result) => {
+      const user = result.user;
+      this.setState({
+        user: user,
+      });
+    });
+  };
+  logout = () => {
+    auth.signOut().then(() => {
+      this.setState({ user: null });
+    });
+  };
   render() {
     return (
       <div>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand>Thomas Jefferson ES Dashboard</Navbar.Brand>
-          <Form inline>
-            <FormControl
-              type="text"
-              placeholder="Username"
-              className="mr-sm-2"
-            />
-            <FormControl
-              type="password"
-              placeholder="Password"
-              className="mr-sm-2"
-            />
-            <Button variant="primary">Log in</Button>
-          </Form>
+          {this.state.user ? (
+            <Button variant="secondary" onClick={this.logout}>
+              Log Out
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={this.login}>
+              Log In
+            </Button>
+          )}
+          {this.state.user ? (
+            <img className="user-profile" src={this.state.user.photoURL} />
+          ) : (
+            <div></div>
+          )}
+          <div className="welcomeMessage">
+            {this.state.user ? (
+              <Navbar.Text>
+                Welcome back {this.state.user.displayName}!
+              </Navbar.Text>
+            ) : (
+              <Navbar.Text>
+                Please sign in to access dashboard features.
+              </Navbar.Text>
+            )}
+          </div>
         </Navbar>
         <Accordion>
           <Card>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline" eventKey="0">
+              <Accordion.Toggle
+                as={Button}
+                variant="outline"
+                eventKey="0"
+                disabled={this.state.user ? false : true}
+              >
                 Enroll Student
               </Accordion.Toggle>
             </Card.Header>
@@ -89,7 +128,12 @@ class App extends Component {
           </Card>
           <Card>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline" eventKey="1">
+              <Accordion.Toggle
+                as={Button}
+                variant="outline"
+                eventKey="1"
+                disabled={this.state.user ? false : true}
+              >
                 Add New Teacher
               </Accordion.Toggle>
             </Card.Header>
@@ -101,7 +145,12 @@ class App extends Component {
           </Card>
           <Card>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline" eventKey="2">
+              <Accordion.Toggle
+                as={Button}
+                variant="outline"
+                eventKey="2"
+                disabled={this.state.user ? false : true}
+              >
                 Assign Student to Teacher
               </Accordion.Toggle>
             </Card.Header>
@@ -116,7 +165,12 @@ class App extends Component {
           </Card>
           <Card>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline" eventKey="3">
+              <Accordion.Toggle
+                as={Button}
+                variant="outline"
+                eventKey="3"
+                disabled={this.state.user ? false : true}
+              >
                 Remove Student or Teacher
               </Accordion.Toggle>
             </Card.Header>
@@ -137,7 +191,10 @@ class App extends Component {
             </Card.Header>
             <Accordion.Collapse eventKey="4">
               <Card.Body>
-                <StudentInfo students={this.state.students} />
+                <StudentInfo
+                  students={this.state.students}
+                  teachers={this.state.teachers}
+                />
               </Card.Body>
             </Accordion.Collapse>
           </Card>
